@@ -136,5 +136,7 @@ This is a long description of what my pod does. In order for CocoaPods to accept
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
+  s.dependency 'KeychainAccess', "~> 3.1.2"
+  s.dependency 'SwiftyBeaver', "~> 1.6.1"
 
 end
