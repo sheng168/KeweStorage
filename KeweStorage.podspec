@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "KeweStorage"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "A list of English words."
   s.swift_version    = '4.0'
 
@@ -70,9 +70,9 @@ This is a long description of what my pod does. In order for CocoaPods to accept
   # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "10.0"
   # s.osx.deployment_target = "10.9"
-  s.watchos.deployment_target = "2.0"
+  s.watchos.deployment_target = "4.0"
   # s.tvos.deployment_target = "9.0"
 
 
