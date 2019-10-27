@@ -7,9 +7,13 @@
 //
 
 import Foundation
-import SwiftyBeaver
+//import SwiftyBeaver
+import Logging
 
-let log = SwiftyBeaver.self
+let log =
+    Logger(label: "us.jsy.KeweStorage")
+//    SwiftyBeaver.self
+
 
 
 //public struct Log {
@@ -19,9 +23,10 @@ let log = SwiftyBeaver.self
 //    }
 //}
 
-extension SwiftyBeaver {
-    public static func trace(_ message: @autoclosure () -> Any = "", _
-        file: String = #file, _ function: String = #function, line: Int = #line, context: Any? = nil) {
-        log.custom(level: .debug, message: message, file: file, function: function, line: line, context: context)
-    }
-}
+//extension SwiftyBeaver {
+//    public static func trace(_ message: @autoclosure () -> Any = "", _
+//        file: String = #file, _ function: String = #function, line: Int = #line, context: Any? = nil) {
+//
+////        log.custom(level: .debug, message: message, file: file, function: function, line: line, context: context)
+//    }
+//}

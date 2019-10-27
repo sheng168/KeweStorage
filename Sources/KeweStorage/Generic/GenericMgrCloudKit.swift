@@ -22,7 +22,7 @@ public class GenericMgrCloudKit<Row: RowProtocol>/*: GenericMgr*/ {
     init() {
         CKContainer.default().accountStatus { status, error in
             if let error = error {
-                log.error(error)
+                log.error("\(error)")
                 // some error occurred (probably a failed connection, try again)
             } else {
 //                switch status {
@@ -88,7 +88,7 @@ public class GenericMgrCloudKit<Row: RowProtocol>/*: GenericMgr*/ {
         
         
         let p = String(describing: Row.self)
-        log.debug(p)
+        log.debug("\(p)")
         prefix = p
 //        userDefaults = UserDefaults(suiteName: prefix)!
     }
@@ -160,7 +160,7 @@ public class GenericMgrCloudKit<Row: RowProtocol>/*: GenericMgr*/ {
         ckDatabase.fetch(withRecordID: CKRecord.ID(recordName: id)) { (CKRecord, Error) in
             if let ck = CKRecord {
                 let a = ck["ok"]
-                log.debug(a as Any)
+                log.debug("\(String(describing: a))")
                 completionHandler(Row(), nil) //TODO
             } else {
                 completionHandler(nil, Error)

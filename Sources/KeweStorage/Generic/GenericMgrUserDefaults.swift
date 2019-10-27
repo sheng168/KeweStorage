@@ -1,5 +1,5 @@
 //
-//  GenericMgrKeychain.swift
+//  GenericMgrUserDefaults.swift
 //  WristVault2
 //
 //  Created by Jin Yu on 10/25/18.
@@ -7,20 +7,18 @@
 //
 
 import Foundation
-import KeychainAccess
 
-public class GenericMgrKeychain<Row: RowProtocol>: GenericMgr {
+public class GenericMgrUserDefaults<Row: RowProtocol>: GenericMgr {
     //    private static let Row = "Row"
     let prefix: String
-    let keychain: Keychain
+    let userDefaults: UserDefaults
     let codec = JSONCodec()
     
     public init() {
-//        let o: Optional<Int>
         let p = String(describing: Row.self)
-        log.debug(p)
+        log.debug("\(p)")
         prefix = p
-        keychain = Keychain(service: p).synchronizable(true)
+        userDefaults = UserDefaults(suiteName: prefix)!
     }
     
     public func create() -> Row {
@@ -32,23 +30,22 @@ public class GenericMgrKeychain<Row: RowProtocol>: GenericMgr {
         let data = try! codec.encoder.encode(r)
         let json = String(data: data, encoding: .utf8)!
         
-        keychain[r.id] = json
+        userDefaults.set(json, forKey: prefix + r.id)
     }
     
     public func list() -> [Row] {
-        let dict = keychain.allKeys()
+        let dict = userDefaults.dictionaryRepresentation()
         
-        return dict.map {
-                get(id: $0)
-            }.filter {
-                $0 != nil
-            }.map {
-                $0!
-            }
+        return dict.filter{ (arg: (key: String, value: Any)) -> Bool in
+            let (key, _) = arg
+            return key.hasPrefix(prefix)
+            }.map { (key: String, value: Any) -> Row in
+                get(id: key.replacingOccurrences(of: prefix, with: ""))!
+        }
     }
     
     public func get(id: String) -> Row? {
-        guard let jsonString = keychain[id] else {
+        guard let jsonString = userDefaults.string(forKey: prefix + id) else {
             return nil
         }
         
@@ -59,6 +56,6 @@ public class GenericMgrKeychain<Row: RowProtocol>: GenericMgr {
     }
     
     public func delete(_ r: Row){
-        keychain[r.id] = nil
+        userDefaults.removeObject(forKey: prefix + r.id)
     }
 }
