@@ -34,7 +34,7 @@ public class JSONCodec {
         return json
     }
     
-    func fromJson<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable {
+    public func fromJson<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable {
         let jsonData = jsonString.data(using: .utf8)!
         let value = try decoder.decode(type.self, from: jsonData)
         return value

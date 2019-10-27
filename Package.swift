@@ -19,7 +19,6 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "3.0.0"),
-//        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
     ],
     targets: [
@@ -29,11 +28,16 @@ let package = Package(
             name: "KeweStorage",
             dependencies: [
                 "KeychainAccess",
-//                "SwiftyBeaver",
                 "Logging"
+            ]),
+        .target(
+            name: "KeweStorageKeychain",
+            dependencies: [
+                "KeychainAccess",
+                "KeweStorage"
             ]),
         .testTarget(
             name: "KeweStorageTests",
-            dependencies: ["KeweStorage"]),
+            dependencies: ["KeweStorage", "KeweStorageKeychain"]),
     ]
 )

@@ -8,6 +8,7 @@
 
 import Foundation
 import KeychainAccess
+import KeweStorage
 
 public class GenericMgrKeychain<Row: RowProtocol>: GenericMgr {
     //    private static let Row = "Row"
@@ -18,7 +19,7 @@ public class GenericMgrKeychain<Row: RowProtocol>: GenericMgr {
     public init() {
 //        let o: Optional<Int>
         let p = String(describing: Row.self)
-        log.debug("\(p)")
+//        log.debug("\(p)")
         prefix = p
         keychain = Keychain(service: p).synchronizable(true)
     }
