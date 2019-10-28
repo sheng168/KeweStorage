@@ -16,12 +16,6 @@ public protocol RowProtocol: Codable {
     var updated: Date {get set}
 }
 
-public struct RowStruct: RowProtocol {
-    public init() {}
-    public var id:String = UUID().uuidString
-    public var updated = Date()
-}
-
 public protocol GenericMgr {
     associatedtype Row: RowProtocol
     
