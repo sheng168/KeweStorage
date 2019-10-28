@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KeweStorage
 
 public struct RowStruct: RowProtocol {
     public init() {}
