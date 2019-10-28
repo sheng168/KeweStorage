@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// doc
 public class Singleton<T: RowProtocol> {
     let objectMgr = GenericMgrUserDefaults<T>()
     

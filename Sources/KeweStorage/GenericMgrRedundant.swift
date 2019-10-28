@@ -1,39 +1,14 @@
 //
-//  GenericMgr.swift
-//  WristVault2
+//  RowMgrRedundant.swift
+//  
 //
-//  Created by Jin Yu on 10/19/18.
-//  Copyright © 2018 Jin Yu. All rights reserved.
+//  Created by Jin.Yu on 10/28/19.
 //
 
 import Foundation
 
-public protocol RowProtocol: Codable {
-    init()
-    var id:String {get set}
-
-//    var created: Date {get set}
-    var updated: Date {get set}
-}
-
-public struct RowStruct: RowProtocol {
-    public init() {}
-    public var id:String = UUID().uuidString
-    public var updated = Date()
-}
-
-public protocol GenericMgr {
-    associatedtype Row: RowProtocol
-    
-    func create() -> Row
-    func put(_ r: inout Row)
-    func list() -> [Row]
-    func get(id: String) -> Row?
-    func delete(_ r: Row)
-}
-
-public struct RowMgrRedundant<T: RowProtocol>: GenericMgr {
-    let RowMgrs: [RowMgrRedundant<T>]
+public struct GenericMgrRedundant<T: RowProtocol>: GenericMgr {
+    let RowMgrs: [GenericMgrRedundant<T>]
 
     public func create() -> T {
         let list = RowMgrs.map { (RowMgr) -> T in
