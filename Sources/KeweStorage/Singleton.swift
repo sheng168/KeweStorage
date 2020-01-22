@@ -12,10 +12,10 @@ import Foundation
 public class Singleton<T: RowProtocol> {
     let objectMgr = GenericMgrUserDefaults<T>()
     
-    public var singlton: T {
+    public var value: T {
         didSet {
-            log.debug("update pref \(singlton)")
-            objectMgr.put(&singlton)
+            log.debug("update pref \(value)")
+            objectMgr.put(&value)
         }
     }
     
@@ -23,12 +23,12 @@ public class Singleton<T: RowProtocol> {
         let ID = "1"
         if let val = objectMgr.get(id: ID) {
             log.debug("loaded pref")
-            singlton = val
+            value = val
         } else {
             log.info("new pref")
             var v = T()
             v.id = ID
-            singlton = v
+            value = v
         }
     }
 }
